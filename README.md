@@ -6,7 +6,7 @@ Haribon is a specialized e-commerce platform designed for the modern real estate
 ---
 
 ## 🚀 Live Demo
-[🔗 View Live Project on Vercel](#) | [📖 View Technical Documentation](documentation/user-manual.md)
+[📖 View Technical Documentation](documentation/user-manual.md)
 
 ---
 
