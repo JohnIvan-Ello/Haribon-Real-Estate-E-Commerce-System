@@ -65,4 +65,4 @@ Haribon bridges the gap between buyers and estate agents with integrated communi
 * **Agent Connectivity:** One-tap calling and emailing features optimized for mobile users.
 
 ---
-*Developed by John Ivan Ello | 2026*
+*Developed by John Ivan Ello | 2024*
