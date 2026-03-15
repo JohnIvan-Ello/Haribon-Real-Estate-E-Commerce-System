@@ -1,0 +1,114 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Real Estate Group</ion-title>
+    <ion-buttons slot="end">
+      <ion-searchbar placeholder="Search"></ion-searchbar>
+      <ion-button routerLink="/favorites">
+        <ion-icon name="heart-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <div class="pro-name">
+      <h2>{{ name }}</h2>
+    </div>
+
+    <!-- Responsive Slideshow (Collage View) -->
+    <div class="collage-container" *ngIf="!isMobile">
+      <div class="large-image">
+        <div class="image-wrapper">
+          <img [src]="images[currentIndex]" alt="Main Image" (click)="openLightbox()">
+          <div class="caption">{{ currentIndex + 1 }} / {{ images.length }}</div>
+        </div>
+      </div>
+      <div class="small-images">
+        <div *ngFor="let image of getNextTwoImages()" class="image-wrapper">
+          <img [src]="image" alt="Small Image" (click)="openLightbox()">
+        </div>
+      </div>
+      <button class="nav-button left" (click)="prevImage()">&#10094;</button>
+      <button class="nav-button right" (click)="nextImage()">&#10095;</button>
+    </div>
+    
+    <div class="single-image-slider" *ngIf="isMobile">
+      <img [src]="images[currentIndex]" alt="Property Image" (click)="openLightbox()">
+      <div class="caption">{{ currentIndex + 1 }} / {{ images.length }}</div>
+      <button class="nav-button left" (click)="prevImage()">&#10094;</button>
+      <button class="nav-button right" (click)="nextImage()">&#10095;</button>
+    </div>
+    
+    <!-- Lightbox -->
+    <div class="lightbox" *ngIf="lightboxOpen">
+      <div class="lightbox-content">
+        <img [src]="images[currentIndex]" alt="Expanded Image">
+        <button class="nav-button left" (click)="prevImage()">&#10094;</button>
+        <button class="nav-button right" (click)="nextImage()">&#10095;</button>
+        <button class="close-button" (click)="closeLightbox()">&times;</button>
+      </div>
+      <div class="caption">{{ currentIndex + 1 }} / {{ images.length }}</div>
+    </div>    
+  </ion-card>
+
+  <ion-card>
+    <div class="details">
+      <h2>{{ price }}</h2>
+      <ion-button fill="clear" (click)="toggleFavorite()" class="favorite">
+        <ion-icon [name]="isFavorite ? 'heart-outline' : 'heart'"></ion-icon>
+      </ion-button>
+    </div>
+    
+    <div class="loc-container">
+      <ion-icon name="location" class="location-icon"></ion-icon>
+      <h5 class="loc">{{ location }}</h5>
+    </div>
+  
+    <hr class="separator">
+  
+    <!-- Property Description -->
+    <div class="description">
+      <h3>Property Description</h3>
+      <p class="desc">{{ description }}</p>
+    </div>
+
+    <hr class="separator">
+
+  <!-- Overview Section -->
+    <h3>Overview</h3>
+    <div style="display: flex; width: 100%">
+      <ion-list lines="none" style="width: 50%">
+        <ion-item>
+          <ion-icon name="grid-outline" slot="start"></ion-icon>
+          <ion-label>Lot Area: {{ overview.lotArea }} sqm</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="home-outline" slot="start"></ion-icon>
+          <ion-label>Floor Area: {{ overview.floorArea }} sqm</ion-label>
+        </ion-item>
+      </ion-list>
+      <ion-list lines="none" style="width: 50%">
+        <ion-item>
+          <ion-icon name="bed-outline" slot="start"></ion-icon>
+          <ion-label>Rooms: {{ overview.rooms }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="water-outline" slot="start"></ion-icon>
+          <ion-label>Bathrooms: {{ overview.bathrooms }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+ 
+    <hr class="separator">
+  
+  <!-- Amenities Section -->
+    <h3>Amenities</h3>
+    <ion-list lines="none" class="amenities">
+      <ion-item *ngFor="let amenity of amenities">
+        <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+        <ion-label>{{ amenity }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>
